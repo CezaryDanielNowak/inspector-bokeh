@@ -1,5 +1,6 @@
 {
   "name": "inspector-bokeh",
+  "version": "1.0.0",
   "repository": {
       "type": "git",
       "url": "https://github.com/timotgl/inspector-bokeh.git"
@@ -7,6 +8,7 @@
   "scripts": {
   	"build": "browserify measure_blur.js --s measureBlur > dist/measure_blur.js"
   },
+  "main": "measure_blur.js",
   "dependencies": {
     "canvas": "1.6.2",
     "canvasfilters": "git://github.com/kig/canvasfilters.git"

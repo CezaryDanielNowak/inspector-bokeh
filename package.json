@@ -10,7 +10,9 @@
   },
   "main": "measure_blur.js",
   "dependencies": {
-    "canvas": "1.6.2",
     "canvasfilters": "git://github.com/kig/canvasfilters.git"
+  },
+  "devDependencies": {
+    "canvas": "1.6.2"
   }
 }

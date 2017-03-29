@@ -7,4 +7,4 @@ onmessage = function(e) {
     id: e.data.id,
     score: score
   });
-}
+};

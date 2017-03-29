@@ -120,6 +120,6 @@ measureBlur.async = function(imageData) {
 
 measureBlur.setup = function(configExt) {
     Object.assign(config, configExt);
-}
+};
 
 module.exports = measureBlur;

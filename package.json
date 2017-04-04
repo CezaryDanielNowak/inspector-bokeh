@@ -10,7 +10,7 @@
   },
   "main": "measure_blur.js",
   "dependencies": {
-    "canvasfilters": "https://github.com/Ragg-/canvasfilters/archive/70a39d810529cfb5e8547645c10cfab7bd540580.tar.gz"
+    "canvasfilters": "https://github.com/paulvarache/canvasfilters/archive/a9d06a6577936c4abd4354e6d2e4c6c9ae94bf40.tar.gz"
   },
   "devDependencies": {
     "canvas": "1.6.2"

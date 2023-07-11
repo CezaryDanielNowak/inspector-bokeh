@@ -1,23 +1,24 @@
-var worker;
 var workerMessageId = 0; // Number.MIN_SAFE_INTEGER would be better,
                          // but I don't think it will ever reach Number.MAX_SAFE_INTEGER
 var workerPromises = {};
 var config = {
-    workerURL: "measure_blur_worker.js"
+    workerURL: "measure_blur_worker.js",
+    worker: null,
 };
 
 function measureBlurAsync(imageData) {
-    if (!worker) {
-        worker = new Worker(config.workerURL);
-        worker.onmessage = function(e) {
-            workerPromises[e.data.id](e.data.score);
-            delete workerPromises[e.data.id];
-        };
+    if (!config.worker) {
+        config.worker = new Worker(config.workerURL);
     }
+
+    config.worker.onmessage = function(e) {
+        workerPromises[e.data.id](e.data.score);
+        delete workerPromises[e.data.id];
+    };
 
     return new Promise(function(resolve) {
         var id = ++workerMessageId;
-        worker.postMessage({
+        config.worker.postMessage({
             id: id,
             imageData: imageData
         });
@@ -30,9 +31,9 @@ measureBlurAsync.setup = function(configExt) {
 };
 
 measureBlurAsync.remove = function(configExt) {
-    if (worker) {
-        worker.terminate();
-        worker = null;
+    if (config.worker) {
+        config.worker.terminate();
+        config.worker = null;
         workerPromises = {};
     }
 };

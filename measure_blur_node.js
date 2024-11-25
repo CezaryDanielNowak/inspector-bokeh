@@ -1,5 +1,5 @@
 var fs = require('fs');
-var Canvas = require('canvas');
+var { Canvas, Image } = require('canvas');
 var measureBlur = require('./measure_blur.js')
 var image;
 
@@ -8,18 +8,18 @@ function createImage(error, data) {
         console.error('Unable to read image file!');
         throw error;
     }
-    image = new Canvas.Image;
+    image = new Image();
     image.onload = drawImageOnCanvas;
     image.src = data;
 }
 
 function drawImageOnCanvas() {
-    var canvas = new Canvas(),
-        context;
+    var canvas = new Canvas();
 
     canvas.width = image.width;
     canvas.height = image.height;
-    context = canvas.getContext('2d');
+    
+    var context = canvas.getContext('2d');
     context.drawImage(image, 0, 0);
 
     showBlurScore(context.getImageData(0, 0, canvas.width, canvas.height))

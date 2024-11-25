@@ -1,17 +1,17 @@
 var Filters = require('canvasfilters').Filters;
 
 function detectEdges(imageData) {
-    var greyscaled, sobelKernel;
+    var greyscaled = Filters.luminance(
+        imageData.width >= 360
+            ? Filters.gaussianBlur(imageData, 5.0)
+            : imageData
+    );
 
-    if (imageData.width >= 360) {
-        greyscaled = Filters.luminance(Filters.gaussianBlur(imageData, 5.0));
-    } else {
-        greyscaled = Filters.luminance(imageData);
-    }
-    sobelKernel = Filters.getFloat32Array(
+    var sobelKernel = Filters.getFloat32Array(
         [1, 0, -1,
-            2, 0, -2,
-            1, 0, -1]);
+         2, 0, -2,
+         1, 0, -1]
+    );
     return Filters.convolve(greyscaled, sobelKernel, true);
 }
 
